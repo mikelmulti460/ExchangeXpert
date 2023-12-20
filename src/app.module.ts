@@ -1,10 +1,21 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { CoreModule } from './core/core.module';
+import { InfraestructureModule } from './infraestructure/infraestructure.module';
+import { ExchangeRepositoryAdapter } from './infraestructure/adapters/exchange.repository.adapter';
+import { ExchangeRateRepositoryAdapter } from './infraestructure/adapters/exchange-rate.repository.adapter';
+import { SharedModule } from './infraestructure/shared/shared.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    InfraestructureModule,
+    SharedModule,
+    CoreModule.register({
+      modules: [InfraestructureModule],
+      adapters: {
+        exchangeRepository: ExchangeRepositoryAdapter,
+        exchangeRateRepository: ExchangeRateRepositoryAdapter,
+      },
+    }),
+  ],
 })
 export class AppModule {}

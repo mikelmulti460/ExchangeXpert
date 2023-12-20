@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres_db
+      - redis
+    volumes:
+      - .:/usr/src/app
+    command: bash -c "while true; do sleep 1000; done"
+
+  redis:
+    image: redis
+    expose:
+      - 6379
+
+  postgres_db:
+    image: postgres:16.1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: development
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
