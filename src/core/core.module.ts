@@ -4,9 +4,9 @@ import { ExchangeRateRepository } from './exchange/domain/ports/outbound/Exchang
 import { ExchangeApplicationService } from './exchange/application/services/ExchangeApplication.service';
 import { ExchangeDomainService } from './exchange/domain/services/ExchangeDomain.service';
 import { ExchangeRateDomainService } from './exchange/domain/services/ExchangeRateDomain.service';
-import { UserRepository } from './auth/domain/ports/outbound/User.repository';
-import { UserApplicationService } from './auth/application/services/UserAppliction.service';
-import { UserDomainService } from './auth/domain/services/UserDomain.service';
+import { UserRepository } from './users/domain/ports/outbound/User.repository';
+import { UserApplicationService } from './users/application/services/UserAppliction.service';
+import { UserDomainService } from './users/domain/services/UserDomain.service';
 
 export type CoreModuleOptions = {
   modules: Type[];

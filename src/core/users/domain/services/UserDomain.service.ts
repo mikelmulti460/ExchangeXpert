@@ -2,6 +2,7 @@ import { User } from '../entities/User';
 import { UserService } from '../ports/inbound/UserService';
 import { UserRepository } from '../ports/outbound/User.repository';
 import { UserServiceError } from '../../shared/error/UserService.error';
+import { UserApplicationError } from '../../shared/error/UserApplication.error';
 
 export class UserDomainService implements UserService {
   constructor(private repository: UserRepository) {}
@@ -56,8 +57,8 @@ export class UserDomainService implements UserService {
     }
 
     // Expresión regular para verificar que el nombre de usuario
-    // sólo contenga letras minúsculas y ninguna otra cosa
-    const regex = /^[a-z]+$/;
+    // sólo contenga letras minúsculas y números
+    const regex = /^[a-z0-9]+$/;
 
     return regex.test(username);
   }
@@ -77,11 +78,11 @@ export class UserDomainService implements UserService {
   async userValidations(user: User): Promise<boolean> {
     switch (true) {
       case !(await this.validateEmail(user.email)):
-        throw new UserServiceError('Invalid email');
+        throw new UserApplicationError('Invalid email');
       case !(await this.validateUsername(user.username)):
-        throw new UserServiceError('Invalid username');
+        throw new UserServiceError('Invalid username, only lowercase letters, numbers and length less than 16 characters are allowed');
       case !(await this.validatePassword(user.password)):
-        throw new UserServiceError('Invalid password');
+        throw new UserServiceError('Invalid password, it must contain at least one uppercase letter, one lowercase letter, one number and one special character');
     }
     return true;
   }
