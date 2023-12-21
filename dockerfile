@@ -7,4 +7,9 @@ RUN yarn install
 COPY . .
 
 EXPOSE 3000
-# CMD ["node", "server.js"]
+
+RUN yarn build
+
+#TODO: edit this to run the production build
+
+CMD ["yarn", "start"]
