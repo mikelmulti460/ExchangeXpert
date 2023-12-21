@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfig } from '../shared/config/database.config';
 import { ExchangeEntity } from './entities/Exchange.entity';
 import { ExchangeRateEntity } from './entities/ExchangeRate.entity';
+import { UserEntity } from './entities/User.entity';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { ExchangeRateEntity } from './entities/ExchangeRate.entity';
           username: database.user,
           password: database.password,
           database: database.name,
-          entities: [ExchangeEntity, ExchangeRateEntity],
+          entities: [ExchangeEntity, ExchangeRateEntity, UserEntity],
           synchronize: false,
           logging: ['query'],
         };

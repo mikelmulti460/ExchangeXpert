@@ -7,6 +7,7 @@ import {
   Post,
   UseFilters,
   Param,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -23,6 +24,7 @@ import { ExchangeApplicationError } from '../../../core/exchange/shared/error/Ex
 import { EXCHANGE_APPLICATION } from '../../../core/core.module';
 import { AppResponse } from '../model/app.response';
 import { CreateExchangeRequest } from '../model/create-exchange.request';
+import { JwtAuthGuard } from 'src/infraestructure/auth/guards/jwt-auth.guard';
 
 @ApiTags('Exchange')
 @Controller('/exchange')
@@ -44,6 +46,7 @@ export class ExchangeController {
     description: 'Internal server error.',
   })
   @HttpCode(201)
+  @UseGuards(JwtAuthGuard)
   @Post()
   async createExchange(
     @Body() request: CreateExchangeRequest,

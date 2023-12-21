@@ -4,6 +4,7 @@ import { InfraestructureModule } from './infraestructure/infraestructure.module'
 import { ExchangeRepositoryAdapter } from './infraestructure/adapters/exchange.repository.adapter';
 import { ExchangeRateRepositoryAdapter } from './infraestructure/adapters/exchange-rate.repository.adapter';
 import { SharedModule } from './infraestructure/shared/shared.module';
+import { UserRepositoryAdapter } from './infraestructure/adapters/user.repository.dapter';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { SharedModule } from './infraestructure/shared/shared.module';
       adapters: {
         exchangeRepository: ExchangeRepositoryAdapter,
         exchangeRateRepository: ExchangeRateRepositoryAdapter,
+        userRepository: UserRepositoryAdapter,
       },
     }),
   ],

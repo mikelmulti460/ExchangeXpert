@@ -1,7 +1,7 @@
 import { Exchange } from '../../domain/entities/Exchange';
 import { ExchangeRate } from '../../domain/entities/ExchangeRate';
-import { ExchangeRateService } from '../../domain/ports/inbound/ExchangeRateService';
 import { ExchangeService } from '../../domain/ports/inbound/ExchangeService';
+import { ExchangeRateService } from '../../domain/ports/inbound/ExchangeRateService';
 
 export class ExchangeApplicationService
   implements ExchangeService, ExchangeRateService
