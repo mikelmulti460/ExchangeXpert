@@ -39,7 +39,16 @@ export class ExchangeApplicationService
   async getExchangeRateById(id: number): Promise<ExchangeRate> {
     return this.exchangeRateRepository.getExchangeRateById(id);
   }
-  // async setExchangeRate(sourceCurrency, targetCurrency, rate): Promise<ExchangeRate> {
-  //     return this.exchangeRateRepository.setExchangeRate(sourceCurrency, targetCurrency, rate);
-  // }
+
+  async setExchangeRate(
+    sourceCurrency: string,
+    targetCurrency: string,
+    rate: number,
+  ): Promise<ExchangeRate> {
+    return this.exchangeRateRepository.setExchangeRate(
+      sourceCurrency,
+      targetCurrency,
+      rate,
+    );
+  }
 }

@@ -7,5 +7,9 @@ export interface ExchangeRateService {
   getRate(sourceCurrency: string, targetCurrency: string): Promise<number>;
   getExchangeRates(): Promise<ExchangeRate[]>;
   getExchangeRateById(id: number): Promise<ExchangeRate>;
-  // setExchangeRate(sourceCurrency: string, targetCurrency: string, rate: number): Promise<ExchangeRate>;
+  setExchangeRate(
+    sourceCurrency: string,
+    targetCurrency: string,
+    rate: number,
+  ): Promise<ExchangeRate>;
 }

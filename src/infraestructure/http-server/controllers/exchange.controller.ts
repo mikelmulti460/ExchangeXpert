@@ -9,45 +9,38 @@ import {
   Param,
   UseGuards,
 } from '@nestjs/common';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 import {
-  ApiBadRequestResponse,
-  ApiCreatedResponse,
-  ApiInternalServerErrorResponse,
-  ApiParam,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
-import { CreateExchangeFilter } from '../exceptions/exchange.exception';
+  ExchangeFilter,
+  ExchangeServiceFilter,
+} from '../exceptions/exchange.exception';
 import { Exchange } from '../../../core/exchange/domain/entities/Exchange';
 import { ExchangeApplication } from '../../../core/exchange/application/ExchangeApplication';
 import { ExchangeApplicationError } from '../../../core/exchange/shared/error/ExchangeApplication.error';
 import { EXCHANGE_APPLICATION } from '../../../core/core.module';
 import { AppResponse } from '../model/app.response';
 import { CreateExchangeRequest } from '../model/create-exchange.request';
-import { JwtAuthGuard } from 'src/infraestructure/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import {
+  ApiSuccessResponse,
+  ApiErrorResponse,
+} from '../custom-decorators/customApi.decorators';
 
 @ApiTags('Exchange')
 @Controller('/exchange')
-@UseFilters(CreateExchangeFilter)
+@UseFilters(ExchangeFilter)
+@UseFilters(ExchangeServiceFilter)
 export class ExchangeController {
   constructor(
     @Inject(EXCHANGE_APPLICATION)
     private exchangeApplication: ExchangeApplication,
   ) {}
 
-  @ApiCreatedResponse({
-    description: 'The exchange has been successfully created.',
-    type: AppResponse,
-  })
-  @ApiBadRequestResponse({
-    description: 'The exchange could not be created.',
-  })
-  @ApiInternalServerErrorResponse({
-    description: 'Internal server error.',
-  })
+  @ApiSuccessResponse('The exchange has been successfully created.')
+  @ApiErrorResponse('The exchange could not be created.')
+  @Post()
   @HttpCode(201)
   @UseGuards(JwtAuthGuard)
-  @Post()
   async createExchange(
     @Body() request: CreateExchangeRequest,
   ): Promise<AppResponse> {
@@ -67,99 +60,18 @@ export class ExchangeController {
     }
   }
 
-  @ApiResponse({
-    description: 'The exchange has been successfully found.',
-    type: AppResponse,
-  })
-  @ApiBadRequestResponse({
-    description: 'The exchange could not be found.',
-  })
-  @ApiInternalServerErrorResponse({
-    description: 'Internal server error.',
-  })
-  @ApiParam({ name: 'id', type: Number })
-  @HttpCode(200)
+  @ApiSuccessResponse('The exchange has been successfully retrieved.')
+  @ApiErrorResponse('The exchange could not be retrieved.')
   @Get('/operations/:id/')
+  @ApiParam({ name: 'id', type: Number })
+  @UseGuards(JwtAuthGuard)
+  @HttpCode(200)
   async findExchange(@Param() params: { id: number }): Promise<AppResponse> {
     const exchangeData = await this.exchangeApplication.findExchange(params.id);
     return {
       status: 200,
       message: 'The exchange has been successfully found.',
       data: exchangeData,
-    };
-  }
-
-  @ApiResponse({
-    description: 'ok',
-    type: AppResponse,
-  })
-  @ApiBadRequestResponse({
-    description: 'The exchange could not be found.',
-  })
-  @ApiInternalServerErrorResponse({
-    description: 'Internal server error.',
-  })
-  @HttpCode(200)
-  @Get('/rates/')
-  async getAllExchangesRate(): Promise<AppResponse> {
-    const exchangeRates = await this.exchangeApplication.getExchangeRates();
-    return {
-      status: 200,
-      message: 'ok',
-      data: exchangeRates,
-    };
-  }
-
-  @ApiResponse({
-    description: 'The exchange rate has been successfully found.',
-    type: AppResponse,
-  })
-  @ApiBadRequestResponse({
-    description: 'The exchange rate could not be found.',
-  })
-  @ApiInternalServerErrorResponse({
-    description: 'Internal server error.',
-  })
-  @ApiParam({ name: 'sourceCurrency', type: String })
-  @ApiParam({ name: 'targetCurrency', type: String })
-  @HttpCode(200)
-  @Get('/rates/:sourceCurrency/:targetCurrency')
-  async getExchangeRate(
-    @Param() params: { sourceCurrency: string; targetCurrency: string },
-  ): Promise<AppResponse> {
-    const exchangeRate = await this.exchangeApplication.getExchangeRate(
-      params.sourceCurrency,
-      params.targetCurrency,
-    );
-    return {
-      status: 200,
-      message: 'The exchange rate has been successfully found.',
-      data: exchangeRate,
-    };
-  }
-
-  @ApiResponse({
-    description: 'The exchange rate has been successfully found.',
-    type: AppResponse,
-  })
-  @ApiBadRequestResponse({
-    description: 'The exchange could not be found.',
-  })
-  @ApiInternalServerErrorResponse({
-    description: 'Internal server error.',
-  })
-  @HttpCode(200)
-  @Get('/rates/:id/')
-  async getExchangeRateById(
-    @Param() params: { id: number },
-  ): Promise<AppResponse> {
-    const exchangeRate = await this.exchangeApplication.getExchangeRateById(
-      params.id,
-    );
-    return {
-      status: 200,
-      message: 'The exchange rate has been successfully found.',
-      data: exchangeRate,
     };
   }
 }

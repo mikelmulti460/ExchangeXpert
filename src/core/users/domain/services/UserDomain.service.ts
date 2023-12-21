@@ -80,9 +80,13 @@ export class UserDomainService implements UserService {
       case !(await this.validateEmail(user.email)):
         throw new UserApplicationError('Invalid email');
       case !(await this.validateUsername(user.username)):
-        throw new UserServiceError('Invalid username, only lowercase letters, numbers and length less than 16 characters are allowed');
+        throw new UserServiceError(
+          'Invalid username, only lowercase letters, numbers and length less than 16 characters are allowed',
+        );
       case !(await this.validatePassword(user.password)):
-        throw new UserServiceError('Invalid password, it must contain at least one uppercase letter, one lowercase letter, one number and one special character');
+        throw new UserServiceError(
+          'Invalid password, it must contain at least one uppercase letter, one lowercase letter, one number and one special character',
+        );
     }
     return true;
   }

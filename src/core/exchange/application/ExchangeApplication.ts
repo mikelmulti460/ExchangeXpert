@@ -14,5 +14,9 @@ export interface ExchangeApplication {
   getExchangeRates(): Promise<ExchangeDTO[]>;
   getRate(sourceCurrency: string, targetCurrency: string): Promise<number>;
   getExchangeRateById(id: number): Promise<ExchangeDTO>;
-  // setExchangeRate(sourceCurrency: string, targetCurrency: string, rate: number): Promise<ExchangeDTO>;
+  setExchangeRate(
+    sourceCurrency: string,
+    targetCurrency: string,
+    rate: number,
+  ): Promise<ExchangeDTO>;
 }

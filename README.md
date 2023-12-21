@@ -58,6 +58,16 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
+## Migrations
+
+```bash
+# generate migration
+$ yarn migration:generate -n <migration-name>
+
+# run migration
+$ yarn migration:run
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
@@ -67,6 +77,223 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## ENDPOINTS
+# Project: ChangeXpert
+# 📁 Collection: Auth 
+
+
+## End-point: login
+### Method: POST
+>```
+>localhost:3000/auth/login/
+>```
+### Body (**raw**)
+
+```json
+{
+    "username": "john",
+    "password": "changeme"
+
+}
+```
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+# 📁 Collection: Exchange 
+
+
+## End-point: create-edit-rate
+### Method: POST
+>```
+>localhost:3000/exchange-rate/
+>```
+### Body (**raw**)
+
+```json
+{
+  "sourceCurrency": "USD",
+  "targetCurrency": "PEN",
+  "rate": 3.85
+}
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|JWT|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: get-rates
+### Method: GET
+>```
+>localhost:3000/exchange-rate/
+>```
+### Body (**raw**)
+
+```json
+
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|JWT|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: get-rates-by-id
+### Method: GET
+>```
+>localhost:3000/exchange-rate/:id
+>```
+### Body (**raw**)
+
+```json
+{
+  "sourceCurrency": "PEN",
+  "targetCurrency": "USD",
+  "amount": 10
+}
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|JWT|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: get-rates-by-id-currencies
+### Method: GET
+>```
+>localhost:3000/exchange-rate/:sourceCurrency/:targetCurrency
+>```
+### Body (**raw**)
+
+```json
+{
+  "sourceCurrency": "PEN",
+  "targetCurrency": "USD",
+  "amount": 10
+}
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|JWT|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: new_exchange
+### Method: POST
+>```
+>localhost:3000/exchange/
+>```
+### Body (**raw**)
+
+```json
+{
+  "sourceCurrency": "USD",
+  "targetCurrency": "PEN",
+  "amount": 10
+}
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|JWT|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: find
+### Method: GET
+>```
+>localhost:3000/exchange/operations/:id/
+>```
+### Body (**raw**)
+
+```json
+{
+  "sourceCurrency": "PEN",
+  "targetCurrency": "USD",
+  "amount": 10
+}
+```
+
+### 🔑 Authentication bearer
+
+|Param|value|Type|
+|---|---|---|
+|token|JWT|string|
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+# 📁 Collection: user 
+
+
+## End-point: current_user
+### Method: GET
+>```
+>localhost:3000/user/
+>```
+### Headers
+
+|Content-Type|Value|
+|---|---|
+|Authorization|Bearer JWT|
+
+
+### Body (**raw**)
+
+```json
+
+```
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+## End-point: create
+### Method: POST
+>```
+>localhost:3000/user/
+>```
+### Body (**raw**)
+
+```json
+{
+  "email": "mikel@gmail.com",
+  "username": "mikelmulti460",
+  "password": "SuperSecretP@ssword123!",
+  "firstName": "user",
+  "lastName": "user"
+}
+```
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+_________________________________________________
+
+
 
 ## License
 

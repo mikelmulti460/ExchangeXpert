@@ -1,34 +1,28 @@
 import {
-    Body,
-    Controller,
-    Get,
-    HttpCode,
-    Inject,
-    Post,
-    UseFilters,
-    Param,
-    UseGuards,
-    Request,
-  } from '@nestjs/common';
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Inject,
+  Post,
+  UseFilters,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 
 import {
-    ApiBadRequestResponse,
-    ApiCreatedResponse,
-    ApiInternalServerErrorResponse,
-    ApiParam,
-    ApiResponse,
-    ApiTags,
-    } from '@nestjs/swagger';
+  ApiBadRequestResponse,
+  ApiCreatedResponse,
+  ApiInternalServerErrorResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { USER_APPLICATION } from '../../../core/core.module';
 import { UserApplication } from '../../../core/users/application/UserApplication';
-import { UserApplicationError } from 'src/core/users/shared/error/UserApplication.error';
-import { UserServiceError } from 'src/core/users/shared/error/UserService.error';
 import { AppResponse } from '../model/app.response';
 import { CreateUserRequest } from '../model/create-user.request';
 import { UserAppFilter, UserServiceFilter } from '../exceptions/user.exception';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
-import { log } from 'console';
 
 @UseFilters(UserAppFilter)
 @UseFilters(UserServiceFilter)
@@ -52,15 +46,12 @@ export class UserController {
   })
   @HttpCode(201)
   @Post()
-  async createUser(
-    @Body() request: CreateUserRequest,
-  ): Promise<AppResponse> {
+  async createUser(@Body() request: CreateUserRequest): Promise<AppResponse> {
     await this.userApplication.createUser(request);
-        return {
-        status: 201,
-        message: 'User created successfully',
+    return {
+      status: 201,
+      message: 'User created successfully',
     };
-
   }
 
   @ApiCreatedResponse({
@@ -76,15 +67,13 @@ export class UserController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   @Get('/')
-  async getUser(
-    @Request() req
-  ): Promise<AppResponse> {
-      const loggedUser = req.user;
-      const user = await this.userApplication.findUser(loggedUser.username);
-      return {
-        status: 200,
-        message: 'User retrieved successfully',
-        data: user,
-      };
+  async getUser(@Request() req): Promise<AppResponse> {
+    const loggedUser = req.user;
+    const user = await this.userApplication.findUser(loggedUser.username);
+    return {
+      status: 200,
+      message: 'User retrieved successfully',
+      data: user,
+    };
   }
 }

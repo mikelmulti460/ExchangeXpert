@@ -1,0 +1,394 @@
+{
+	"info": {
+		"_postman_id": "ec27d063-57ce-47cf-a75f-e1d84ad93bd3",
+		"name": "ChangeXpert",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20592635"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"john\",\n    \"password\": \"changeme\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/auth/login/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exchange",
+			"item": [
+				{
+					"name": "Rates",
+					"item": [
+						{
+							"name": "create-edit-rate",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTcwMzExODI4MiwiZXhwIjoxNzAzMjA0NjgyfQ.cLMTWh83zatYKRYQ2yrnua0yW8bW7il7u0FA8WzHxJE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"sourceCurrency\": \"USD\",\n  \"targetCurrency\": \"PEN\",\n  \"rate\": 3.85\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/exchange-rate/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"exchange-rate",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-rates",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTcwMzExODI4MiwiZXhwIjoxNzAzMjA0NjgyfQ.cLMTWh83zatYKRYQ2yrnua0yW8bW7il7u0FA8WzHxJE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/exchange-rate/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"exchange-rate",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-rates-by-id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTcwMzExODI4MiwiZXhwIjoxNzAzMjA0NjgyfQ.cLMTWh83zatYKRYQ2yrnua0yW8bW7il7u0FA8WzHxJE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"sourceCurrency\": \"PEN\",\n  \"targetCurrency\": \"USD\",\n  \"amount\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/exchange-rate/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"exchange-rate",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-rates-by-id-currencies",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTcwMzExODI4MiwiZXhwIjoxNzAzMjA0NjgyfQ.cLMTWh83zatYKRYQ2yrnua0yW8bW7il7u0FA8WzHxJE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"sourceCurrency\": \"PEN\",\n  \"targetCurrency\": \"USD\",\n  \"amount\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/exchange-rate/:sourceCurrency/:targetCurrency",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"exchange-rate",
+										":sourceCurrency",
+										":targetCurrency"
+									],
+									"variable": [
+										{
+											"key": "sourceCurrency",
+											"value": "PEN"
+										},
+										{
+											"key": "targetCurrency",
+											"value": "USD"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Exchanges",
+					"item": [
+						{
+							"name": "new_exchange",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTcwMzExODI4MiwiZXhwIjoxNzAzMjA0NjgyfQ.cLMTWh83zatYKRYQ2yrnua0yW8bW7il7u0FA8WzHxJE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"sourceCurrency\": \"USD\",\n  \"targetCurrency\": \"PEN\",\n  \"amount\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/exchange/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"exchange",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "find",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTcwMzExODI4MiwiZXhwIjoxNzAzMjA0NjgyfQ.cLMTWh83zatYKRYQ2yrnua0yW8bW7il7u0FA8WzHxJE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"sourceCurrency\": \"PEN\",\n  \"targetCurrency\": \"USD\",\n  \"amount\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/exchange/operations/:id/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"exchange",
+										"operations",
+										":id",
+										""
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "current_user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTcwMzExODI4MiwiZXhwIjoxNzAzMjA0NjgyfQ.cLMTWh83zatYKRYQ2yrnua0yW8bW7il7u0FA8WzHxJE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"mikel@gmail.com\",\n  \"username\": \"mikelmulti460\",\n  \"password\": \"SuperSecretP@ssword123!\",\n  \"firstName\": \"user\",\n  \"lastName\": \"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

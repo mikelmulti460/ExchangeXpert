@@ -10,6 +10,7 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 @Injectable()
 export class ExchangeRateRepositoryAdapter implements ExchangeRateRepository {
   private readonly cacheTTL = 30; // tiempo de vida de la caché en segundos
+  private readonly cachePrefix = 'exchangeRate';
 
   constructor(
     @InjectRepository(ExchangeRateEntity)
@@ -21,7 +22,7 @@ export class ExchangeRateRepositoryAdapter implements ExchangeRateRepository {
     sourceCurrency: string,
     targetCurrency: string,
   ): Promise<ExchangeRate> {
-    const cacheKey = `exchangeRate-${sourceCurrency}-${targetCurrency}`;
+    const cacheKey = `${this.cachePrefix}-${sourceCurrency}-${targetCurrency}`;
     let exchangeRate = await this.cacheManager.get<ExchangeRate>(cacheKey);
 
     if (!exchangeRate) {
@@ -65,15 +66,20 @@ export class ExchangeRateRepositoryAdapter implements ExchangeRateRepository {
       sourceCurrency,
       targetCurrency,
     );
+    const cacheKey = `${this.cachePrefix}-${sourceCurrency}-${targetCurrency}`;
     if (exchangeRate) {
       exchangeRate.rate = rate;
+      await this.cacheManager.del(cacheKey);
       return this.exchangeRateRepository.save(exchangeRate);
+    } else {
+      const newExchangeRate = await this.exchangeRateRepository.save({
+        sourceCurrency,
+        targetCurrency,
+        rate,
+      });
+      await this.cacheManager.set(cacheKey, newExchangeRate, this.cacheTTL);
+      return newExchangeRate;
     }
-    return this.exchangeRateRepository.save({
-      sourceCurrency,
-      targetCurrency,
-      rate,
-    });
   }
 
   async getExchangeRateById(id: number): Promise<ExchangeRate> {
